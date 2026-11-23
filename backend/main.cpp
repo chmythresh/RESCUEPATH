@@ -34,12 +34,26 @@ int main() {
                   << std::endl;
         return 1;
     }
+    const char* dbHostEnv = std::getenv("DB_HOST");
+    const char* dbNameEnv = std::getenv("DB_NAME");
+    const char* dbPortEnv = std::getenv("DB_PORT");
+
+    std::string dbHost = dbHostEnv ? dbHostEnv : "127.0.0.1";
+    std::string dbName = dbNameEnv ? dbNameEnv : "ambulance_route_db";
+    unsigned int dbPort = dbPortEnv ?
+        static_cast<unsigned int>(std::strtoul(dbPortEnv, nullptr, 10)) : 3306;
+
+    if (dbPort == 0 || dbPort > 65535) {
+        std::cerr << "ERROR: Invalid DB_PORT" << std::endl;
+        return 1;
+    }
+
     if (database.connect(
-        "127.0.0.1",
+        dbHost,
         user,
         password,
-        "ambulance_route_db",
-        3306
+        dbName,
+        dbPort
     )) {
         CROW_LOG_INFO << "MySQL database connected successfully";
     } else {
@@ -504,10 +518,19 @@ int main() {
             return crow::response(500, response);
         }
     });
-    app.port(8080).multithreaded().run();
+    const char* renderPort = std::getenv("PORT");
+    int serverPort = renderPort ? std::atoi(renderPort) : 8080;
+
+    if (serverPort <= 0 || serverPort > 65535) {
+        std::cerr << "ERROR: Invalid PORT" << std::endl;
+        return 1;
+    }
+
+    app.bindaddr("0.0.0.0").port(serverPort).multithreaded().run();
 
     return 0;
 }
+
 
 
 
