@@ -76,13 +76,14 @@ Historical route records remain stored in MySQL.
 ### Backend
 Configure MySQL credentials and run the compiled C++ server
 on port 8080.
+open : https://rescuepath-backend-zjus.onrender.com/api/health?utm_source=chatgpt.com
 
 ### Frontend
 cd frontend
 npm install
 npm run dev
 
-Open http://localhost:5173
+Open : https://rescuepath-frontend.vercel.app/
 
 ## Limitations
 - Uses a small simulated road network
