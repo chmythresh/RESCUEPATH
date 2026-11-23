@@ -1,8 +1,8 @@
-﻿import axios from 'axios'
+import axios from 'axios'
 
 const api = axios.create({
-  baseURL: '/api',
-  timeout: 10000,
+  baseURL: `${import.meta.env.VITE_API_BASE_URL || ''}/api`,
+  timeout: 60000,
 })
 
 export async function getHospitals() {
@@ -63,3 +63,4 @@ export async function getRoads() {
   const response = await api.get('/roads')
   return response.data
 }
+
