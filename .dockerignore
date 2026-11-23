@@ -1,0 +1,16 @@
+﻿.git
+.gitignore
+**/node_modules
+**/dist
+**/build
+**/.venv
+**/venv
+**/__pycache__
+**/*.pyc
+**/*.exe
+**/*.dll
+**/*.backup*
+**/*.before*
+frontend
+screenshots
+docs
