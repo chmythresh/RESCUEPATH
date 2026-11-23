@@ -1,0 +1,42 @@
+﻿.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+**/.venv/
+**/venv/
+**/node_modules/
+**/dist/
+**/build/
+*.exe
+*.dll
+*.o
+*.obj
+*.log
+.vs/
+.idea/
+.vscode/
+__pycache__/
+*.pyc
+README.backup.md
+*.backup
+
+# Local backups
+*.backup*
+*.bak
+*~
+
+# Local databases
+*.sqlite
+*.sqlite3
+*.db
+
+# Runtime files
+*.log
+
+# Previous source backups
+*.before*
+**/backup-before-dashboard/
+
+# Crow is included as a dependency
