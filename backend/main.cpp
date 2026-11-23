@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 #include <algorithm>
 #include <iostream>
 #include <cstdlib>
@@ -8,6 +8,7 @@
 #include <mutex>
 #include <iostream>
 #include "crow.h"
+#include "crow/middlewares/cors.h"
 #include <iostream>
 #include "graph.hpp"
 
@@ -19,7 +20,14 @@
 #include <vector>
 
 int main() {
-    crow::SimpleApp app;
+    crow::App<crow::CORSHandler> app;
+
+    auto& cors = app.get_middleware<crow::CORSHandler>();
+
+    cors.global()
+        .origin("*")
+        .methods("GET"_method, "POST"_method, "OPTIONS"_method)
+        .headers("Content-Type", "Authorization");
 
     Database database;
 
@@ -530,6 +538,7 @@ int main() {
 
     return 0;
 }
+
 
 
 
